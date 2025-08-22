@@ -39,7 +39,6 @@ export const lightTheme = createTheme({
     text: { primary: '#172B4D', secondary: '#5E6C84' },
   },
   ...sharedStyles,
-  // --- THIS ENSURES HEADINGS ARE BLACK IN LIGHT MODE ---
   typography: {
     ...sharedStyles.typography,
     h4: { ...sharedStyles.typography.h4, color: '#000000' },
@@ -54,9 +53,10 @@ export const lightTheme = createTheme({
           ...sharedStyles.components.MuiCard.styleOverrides.root,
           border: '1px solid #DFE1E6',
           boxShadow: '0px 1px 1px rgba(9, 30, 66, 0.25)',
-           '&:hover': {
+          '&:hover': {
             transform: 'translateY(-5px)',
-            boxShadow: '0 8px 24px 0 rgba(9, 30, 66, 0.15)',
+            // --- THIS CREATES THE GLOW EFFECT ---
+            boxShadow: '0 8px 24px 0 rgba(0, 82, 204, 0.2)',
           },
         }
       }
@@ -72,21 +72,25 @@ export const darkTheme = createTheme({
     text: { primary: '#FFFFFF', secondary: '#B0B0B0' },
   },
   ...sharedStyles,
-  // --- THIS SETS HEADINGS TO BLACK IN DARK MODE FOR YOUR EXPERIMENT ---
   typography: {
     ...sharedStyles.typography,
-    h4: { ...sharedStyles.typography.h4, color: '#000000' }, // Set to black
-    h5: { ...sharedStyles.typography.h5, color: '#000000' }, // Set to black
+    h4: { ...sharedStyles.typography.h4, color: '#000000' },
+    h5: { ...sharedStyles.typography.h5, color: '#000000' },
   },
   components: {
     ...sharedStyles.components,
-     MuiCard: {
+    MuiCard: {
       styleOverrides: {
         ...sharedStyles.components.MuiCard.styleOverrides,
         root: {
           ...sharedStyles.components.MuiCard.styleOverrides.root,
           border: '1px solid #30363D',
           boxShadow: '0 8px 24px rgba(0,0,0,0.4)',
+          // --- THIS CREATES THE GLOW EFFECT FOR DARK MODE ---
+           '&:hover': {
+            transform: 'translateY(-5px)',
+            boxShadow: '0 10px 30px 0 rgba(87, 157, 255, 0.15)',
+          },
         }
       }
     },

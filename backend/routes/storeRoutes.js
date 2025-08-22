@@ -1,5 +1,3 @@
-// backend/routes/storeRoutes.js
-
 const express = require('express');
 const router = express.Router();
 const {
@@ -7,20 +5,19 @@ const {
     createStore,
     updateStore,
     deleteStore,
-    createStoreRating // Import the new function
+    createStoreRating
 } = require('../controllers/storeController');
 const { protect, isAdmin } = require('../middleware/authMiddleware');
 
-// Public route - anyone can see the stores
+// Public route
 router.route('/').get(getAllStores);
 
-// Admin-only routes for creating, updating, and deleting stores
+// Private route for users to rate a store
+router.route('/:id/ratings').post(protect, createStoreRating);
+
+// Admin-only routes
 router.route('/').post(protect, isAdmin, createStore);
 router.route('/:id').put(protect, isAdmin, updateStore);
 router.route('/:id').delete(protect, isAdmin, deleteStore);
-
-// --- NEW ROUTE ---
-// Private route for any logged-in user to create a rating
-router.route('/:id/ratings').post(protect, createStoreRating);
 
 module.exports = router;

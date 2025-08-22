@@ -6,7 +6,7 @@ const api = axios.create({
   baseURL: API_URL,
 });
 
-// Automatically adds the user's login token to every secure request
+// Automatically adds the auth token to every request
 api.interceptors.request.use((config) => {
   const user = JSON.parse(localStorage.getItem('user'));
   if (user && user.token) {
@@ -39,5 +39,6 @@ export const getAdminUsers = (params) => api.get('/admin/users', { params });
 
 // --- STORE OWNER FUNCTIONS ---
 export const getStoreOwnerDashboard = () => api.get('/store-owner/dashboard');
+export const getRatingDistribution = () => api.get('/store-owner/dashboard/rating-distribution');
 
-export default api; 
+export default api;

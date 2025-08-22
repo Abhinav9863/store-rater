@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { getStoreOwnerDashboard } from '../services/api';
+import RatingChart from '../components/RatingChart.jsx';
 import {
   Typography,
   Container,
@@ -39,7 +40,6 @@ function StoreOwnerDashboard() {
   if (error) return <Typography color="error">{error}</Typography>;
   if (!dashboardData) return <Typography>No data found.</Typography>;
 
-
   const { storeDetails, ratings } = dashboardData;
 
   return (
@@ -59,6 +59,8 @@ function StoreOwnerDashboard() {
           </Box>
         </CardContent>
       </Card>
+
+      <RatingChart />
       
       <Typography variant="h5" sx={{ my: 2 }}>Users Who Rated Your Store</Typography>
       <TableContainer component={Paper}>
@@ -73,8 +75,8 @@ function StoreOwnerDashboard() {
           <TableBody>
             {ratings.map((rating) => (
               <TableRow key={rating.id}>
-                <TableCell>{rating.User.name}</TableCell>
-                <TableCell>{rating.User.email}</TableCell>
+                <TableCell>{rating.User ? rating.User.name : 'N/A'}</TableCell>
+                <TableCell>{rating.User ? rating.User.email : 'N/A'}</TableCell>
                 <TableCell>
                   <Rating value={rating.rating} readOnly />
                 </TableCell>
@@ -87,4 +89,4 @@ function StoreOwnerDashboard() {
   );
 }
 
-export default StoreOwnerDashboard;  
+export default StoreOwnerDashboard;

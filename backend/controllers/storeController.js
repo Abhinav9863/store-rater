@@ -28,11 +28,11 @@ exports.getAllStores = async (req, res) => {
         attributes: []
       }],
       group: ['Store.id'],
-      // Sort by the calculated overallRating in descending order, placing stores with no ratings at the end
       order: [[sequelize.fn('AVG', sequelize.col('Ratings.rating')), 'DESC NULLS LAST']]
     });
     res.json(stores);
   } catch (error) {
+    console.error(error);
     res.status(500).json({ message: 'Server error', error: error.message });
   }
 };
@@ -117,6 +117,6 @@ exports.createStoreRating = async (req, res) => {
       res.status(404).json({ message: 'Store not found' });
     }
   } catch (error) {
-    res.status(500).json({ message: 'Server error', error: aerror.message });
+    res.status(500).json({ message: 'Server error', error: error.message });
   }
 };
