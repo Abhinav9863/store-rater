@@ -58,3 +58,13 @@ npm install
 
 # Start the server
 npm start
+
+###  Frontend Setup
+# Open a new terminal and navigate to the frontend folder
+cd frontend
+
+# Install dependencies
+npm install
+
+# Start the client
+npm run dev
